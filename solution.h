@@ -39,19 +39,17 @@ public:
     if (head) {
       ListNode* pre_left = nullptr;
       ListNode* left = head;
-      ListNode* right = head->next;
-      while (right) {
-        if ( isAdjacentNodes(left, right) ) {
+      while (left) {
+        ListNode* right = left->next;
+        if (right) {
           if (!pre_left) {
             head = right;
           }
           swapListNodes(pre_left, left, right);
-          std::swap(left, right);
         }
 
         pre_left = left;
         left = left->next;
-        right = right ->next;
       }
     }
 
@@ -59,12 +57,6 @@ public:
   }
 
 private:
-  bool isAdjacentNodes(ListNode* left, ListNode* right) {
-    return left && right
-        && (left->val + 1 == right->val
-            || right-> val + 1 == left->val);
-  }
-
   void swapListNodes(ListNode* pre_left, ListNode* left, ListNode* right) {
     if (pre_left) {
       pre_left->next = right;
